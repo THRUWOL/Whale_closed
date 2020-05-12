@@ -33,9 +33,9 @@ async def leave(ctx):
     else:
         voice = await channel.connect()
 # удаление сообщений
-@bot.command(pass_context=True)
-async def clear(ctx, amount = 1):
-    await ctx.channel.purge(limit = amount)
+#@bot.command(pass_context=True)
+#async def clear(ctx, amount = 1):
+#    await ctx.channel.purge(limit = amount)
 # вывод текста
 @bot.command(pass_context=True)
 async def pzd(ctx, amount = 1):
