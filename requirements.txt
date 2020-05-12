@@ -1,3 +1,2 @@
 discord.py
-os
 youtube_dl
