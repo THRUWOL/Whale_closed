@@ -3,22 +3,21 @@ import os
 from discord.ext import commands
 from discord.utils import get
 
+bot = command.Bot(command_prefix='.')
 
-bot = commands.Bot(command_prefix='.')
-
-# Проверка работоспособности в консоли
-@bot.event
-async def on_ready():
-    print('[log]буль')
-
-# Проверка работоспособности
-@bot.command(pass_context=True)
-async def bot(ctx, amount = 1):
-    await ctx.channel.purge(limit = amount)
-    await ctx.send('буль')
-
-# Токен, который находится подальше от чужих глаз
+client = discord.Client()
 token = os.environ.get('BOT_TOKEN')
 
-# Запуск бота
-bot.run(token)
+@client.event
+async def on_ready():
+    print('We have logged in as {0.user}'.format(client))
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+    if message.content.startswith('$hello'):
+        await message.channel.send('Hello!')
+
+client.run(token)
