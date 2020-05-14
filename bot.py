@@ -3,7 +3,7 @@ import os
 from discord.ext import commands
 from discord.utils import get
 
-bot = command.Bot(command_prefix='.')
+bot = commands.Bot(command_prefix='.')
 
 client = discord.Client()
 token = os.environ.get('BOT_TOKEN')
