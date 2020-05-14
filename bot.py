@@ -5,7 +5,6 @@ from discord.utils import get
 
 bot = commands.Bot(command_prefix='.')
 
-#test
 client = discord.Client()
 token = os.environ.get('BOT_TOKEN')
 
