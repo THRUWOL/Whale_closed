@@ -9,4 +9,4 @@ ROLES = {
 # исключения
 EXCROLES = ()
 # максимальное кол-во ролей для 1 пользователя
-MAX_ROLES_PER_USER = 2
+MAX_ROLES_PER_USER = 5
