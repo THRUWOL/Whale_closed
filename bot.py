@@ -5,6 +5,7 @@ last update: 15 may 2020
 by Nikita [thruwol] Yarosh
 '''
 import discord
+import config
 import os
 from discord import utils
 from discord.ext import commands
