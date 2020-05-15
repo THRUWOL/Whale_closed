@@ -33,9 +33,9 @@ async def on_ready():
 
 # добавление новых сообщений
 @client.event
-async def on_message(self, message):
+async def on_message(message):
     #ввод сообщения
-    print('Message from {0.author}: {0.content}'.format(message))
+    await message.channel.send('Hello!')
 
 # запуск бота
 client.run(token)
