@@ -35,7 +35,6 @@ async def on_ready():
 @client.event
 async def on_message(message):
     #ввод сообщения
-    await message.channel.send('@everyone')
 
 # запуск бота
 client.run(token)
