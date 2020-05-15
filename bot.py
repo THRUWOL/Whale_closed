@@ -25,6 +25,7 @@ client.run(token)
 """
 from urllib.request import urlopen
 from bs4 import BeautifulSoup as bs
+import os
 import requests
 import discord
 from discord.ext import commands
