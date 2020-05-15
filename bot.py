@@ -31,10 +31,6 @@ async def on_ready():
     except Exception as e:
         print(e)
 
-# добавление новых сообщений
-@client.event
-async def on_message(message):
-    #ввод сообщения
 
 # запуск бота
 client.run(token)
