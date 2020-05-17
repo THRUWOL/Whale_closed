@@ -7,19 +7,17 @@ by Nikita [thruwol] Yarosh
 import discord
 import config
 import os
+import requests
+import io
+from PIL import Image, ImageDont, ImageDraw
 from discord import utils
 from discord.ext import commands
 from discord.utils import get
 
 # создание клиента discord
-client = discord.Client()
+client = discord.Client(command_prefix='.')
 
-# префикс для команд боту
-bot = commands.Bot(command_prefix='.')
-
-# взятие токена с спец. сервиса
-token = os.environ.get('BOT_TOKEN')
-
+# Выдача ролей по реакци
 class MyClient(discord.Client):
     async def on_ready(self):
         print('Logged on as {0}!'.format(self.user))
@@ -63,7 +61,34 @@ class MyClient(discord.Client):
         except Exception as e:
             print(repr(e))
 
+# Создание карточки пользователя
+@client.command(aliases = ['я', 'карта']) #.я
+async def card_user(ctx):
+    await ctx.chanel.purge(limit = 1)
 
+    img = Image.new('RGBA', (400, 200), '#232529')
+    url = str(ctx.author.avatar_url)[:=10]
+
+    response = requests.get(url, stream = True)
+    response = Image.open(io.BytesIO(response.content))
+    response = response.convert('RGBA')
+    response = response.resize((100, 100), Image.ANTIALIAS)
+
+    img.paste(response, (15, 15, 115, 115))
+
+    idraw = ImageDraw.Draw(img)
+    name = ctx.author.name
+    tag = ctx.author.discriminator
+
+    headline = ImageFont.truetype('arial.ttf', size = 20)
+    undertext = ImageFont.truetype('arial.ttf', size = 12)
+
+    idraw.text((145, 15), f'{name}#{tag}', font = headline)
+    idraw.text((145, 50), f'ID: {ctx.author.id}', font = undertext)
+
+    img.save('user_card.png')
+
+    await ctx.send(file = discord.File(fp = 'user_card.png'))
 
 client = MyClient()
-client.run(token)
+client.run(config.token)
