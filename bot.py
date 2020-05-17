@@ -67,7 +67,7 @@ async def card_user(ctx):
     await ctx.chanel.purge(limit = 1)
 
     img = Image.new('RGBA', (400, 200), '#232529')
-    url = str(ctx.author.avatar_url)[:=10]
+    url = str(ctx.author.avatar_url)[:-10]
 
     response = requests.get(url, stream = True)
     response = Image.open(io.BytesIO(response.content))
