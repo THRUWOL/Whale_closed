@@ -92,5 +92,4 @@ async def card_user(ctx):
 
     await ctx.send(file = discord.File(fp = 'user_card.png'))
 
-client = MyClient()
 client.run(TOKEN)
