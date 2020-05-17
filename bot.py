@@ -6,9 +6,6 @@ by Nikita [thruwol] Yarosh
 '''
 import config
 
-# взятие токена с спец. сервиса
-token = os.environ.get('BOT_TOKEN')
-
 # Выдача ролей по реакции
 class MyClient(discord.Client):
     async def on_ready(self):
