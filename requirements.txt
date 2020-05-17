@@ -2,4 +2,3 @@ discord.py
 wheel
 bs4
 requests
-Pillow
