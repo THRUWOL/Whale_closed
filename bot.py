@@ -54,4 +54,4 @@ class MyClient(discord.Client):
             print(repr(e))
 
 client = MyClient(command_prefix='.')
-client.run(token)
+client.run(config.token)
