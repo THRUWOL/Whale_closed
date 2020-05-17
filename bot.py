@@ -5,6 +5,14 @@ last update: 15 may 2020
 by Nikita [thruwol] Yarosh
 '''
 import config
+import discord
+import os
+from discord import utils
+from discord.ext import commands
+from discord.utils import get
+
+# взятие токена с спец. сервиса
+token = os.environ.get('BOT_TOKEN')
 
 # Выдача ролей по реакции
 class MyClient(discord.Client):
@@ -51,4 +59,4 @@ class MyClient(discord.Client):
             print(repr(e))
 
 client = MyClient(command_prefix='.')
-client.run(config.token)
+client.run(token)
