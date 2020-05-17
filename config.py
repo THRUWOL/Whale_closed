@@ -1,3 +1,9 @@
+import discord
+import os
+from discord import utils
+from discord.ext import commands
+from discord.utils import get
+
 # id поста с которого считываются реакции
 POST_ID = 711280561770987561
 # список ролей в соответствии с реакциями

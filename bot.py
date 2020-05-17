@@ -4,15 +4,7 @@ last update: 15 may 2020
 
 by Nikita [thruwol] Yarosh
 '''
-import discord
 import config
-import os
-from discord import utils
-from discord.ext import commands
-from discord.utils import get
-
-# создание клиента discord
-#client = discord.Client(command_prefix='.')
 
 # взятие токена с спец. сервиса
 token = os.environ.get('BOT_TOKEN')
@@ -60,8 +52,6 @@ class MyClient(discord.Client):
             print('[ERROR] KeyError, no role found for ' + emoji)
         except Exception as e:
             print(repr(e))
-
-
 
 client = MyClient(command_prefix='.')
 client.run(token)
