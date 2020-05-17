@@ -9,7 +9,7 @@ import config
 import os
 import requests
 import io
-from PIL import Image, ImageDont, ImageDraw
+from PIL import Image, ImageFont, ImageDraw
 from discord import utils
 from discord.ext import commands
 from discord.utils import get
