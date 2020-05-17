@@ -15,12 +15,12 @@ from discord.ext import commands
 from discord.utils import get
 
 # создание клиента discord
-client = discord.Client(command_prefix='.')
+client = commands.Bot(command_prefix='.')
 
 TOKEN = os.environ.get('BOT_TOKEN')
 
 # Выдача ролей по реакци
-class MyClient(discord.Client):
+class MyClient(commands.Bot):
     async def on_ready(self):
         print('Logged on as {0}!'.format(self.user))
 
