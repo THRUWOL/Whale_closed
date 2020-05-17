@@ -17,6 +17,8 @@ from discord.utils import get
 # создание клиента discord
 client = discord.Client(command_prefix='.')
 
+TOKEN = os.environ.get('BOT_TOKEN')
+
 # Выдача ролей по реакци
 class MyClient(discord.Client):
     async def on_ready(self):
@@ -91,4 +93,4 @@ async def card_user(ctx):
     await ctx.send(file = discord.File(fp = 'user_card.png'))
 
 client = MyClient()
-client.run(config.token)
+client.run(TOKEN)
