@@ -59,5 +59,10 @@ class MyClient(discord.Client):
         except Exception as e:
             print(repr(e))
 
+@client.command(pass_context=True)
+
+async def cls(ctx, amount = 1):
+    await ctx.channel.purge(limit = amount)
+
 client = MyClient(command_prefix='.')
 client.run(os.environ.get('BOT_TOKEN'))
