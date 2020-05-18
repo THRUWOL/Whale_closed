@@ -11,10 +11,7 @@ from discord import utils
 from discord.ext import commands
 from discord.utils import get
 
-client = commands.bot(command_prefix = '.')
-
-# взятие токена с спец. сервиса
-token = os.environ.get('BOT_TOKEN')
+client = commands.Bot(command_prefix = '.')
 
 @client.command(pass_context = True)
 
@@ -66,4 +63,4 @@ async def on_raw_reaction_remove(self, payload):
     except Exception as e:
         print(repr(e))
 
-client.run(token)
+client.run(os.environ.get('BOT_TOKEN'))
