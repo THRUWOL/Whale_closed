@@ -13,7 +13,7 @@ from discord.utils import get
 
 bot = commands.Bot(command_prefix = '.')
 
-Class MyClient(discord.Client):
+class MyClient(discord.Client):
     # Выводит информацию об успешном подключении
 
     async def on_ready(self):
