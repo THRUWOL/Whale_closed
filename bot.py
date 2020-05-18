@@ -20,7 +20,7 @@ class MyClient(discord.Client):
         print('Logged on as {0}!'.format(self.user))
 
     async def cls(ctx, amount = 1):
-        await.ctx.channel.purge(limit = amount)
+        await ctx.channel.purge(limit = amount)
 
     async def on_raw_reaction_add(self, payload):
         if payload.message_id == config.POST_ID:
