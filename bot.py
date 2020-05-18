@@ -14,10 +14,13 @@ from discord.utils import get
 # взятие токена с спец. сервиса
 token = os.environ.get('BOT_TOKEN')
 
-# Выдача ролей по реакции
+
 class MyClient(discord.Client):
     async def on_ready(self):
         print('Logged on as {0}!'.format(self.user))
+
+    async def cls(ctx, amount = 1):
+        await.ctx.channel.purge(limit = amount)
 
     async def on_raw_reaction_add(self, payload):
         if payload.message_id == config.POST_ID:
