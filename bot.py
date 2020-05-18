@@ -11,7 +11,7 @@ from discord import utils
 from discord.ext import commands
 from discord.utils import get
 
-bot = commands.Bot(command_prefix = '.')
+bot = commands.Bot(self, command_prefix = '.')
 
 # Выводит информацию об успешном подключении
 @bot.event
