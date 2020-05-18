@@ -66,4 +66,4 @@ async def on_raw_reaction_remove(self, payload):
 async def cls(ctx, amount = 1):
     await ctx.channel.purge(limit = amount)
 
-client.run(os.environ.get('BOT_TOKEN'))
+bot.run(os.environ.get('BOT_TOKEN'))
