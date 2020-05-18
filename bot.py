@@ -11,10 +11,12 @@ from discord import utils
 from discord.ext import commands
 from discord.utils import get
 
+client = MyClient(command_prefix='.')
+
 # взятие токена с спец. сервиса
 token = os.environ.get('BOT_TOKEN')
 
-@client.command(pass = True)
+@client.command(pass_context = True)
 
 async def cls(ctx, amount = 1):
     await ctx.channel.purge(limit = amount)
@@ -63,5 +65,4 @@ class MyClient(discord.Client):
         except Exception as e:
             print(repr(e))
 
-client = MyClient(command_prefix='.')
 client.run(token)
