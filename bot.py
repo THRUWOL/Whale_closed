@@ -11,6 +11,8 @@ from discord import utils
 from discord.ext import commands
 from discord.utils import get
 
+bot = commands.Bot(command_prefix = '.')
+
 # events. Добавление ролей по реакциям
 class MyClient(discord.Client):
 
@@ -59,10 +61,10 @@ class MyClient(discord.Client):
         except Exception as e:
             print(repr(e))
 
-@commands.command(pass_context=True)
+@bot.command(pass_context=True)
 
 async def cls(ctx, amount = 1):
     await ctx.channel.purge(limit = amount)
 
-client = MyClient(command_prefix='.')
+client = MyClient()
 client.run(os.environ.get('BOT_TOKEN'))
