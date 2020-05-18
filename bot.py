@@ -11,16 +11,16 @@ from discord import utils
 from discord.ext import commands
 from discord.utils import get
 
-bot = commands.Bot(self, command_prefix = '.')
+bot = commands.Bot(command_prefix = '.')
 
 # Выводит информацию об успешном подключении
 @bot.event
-async def on_ready(self):
+async def on_ready():
     print('Бот успешно подключился к серверу'.format(self.user))
 
 # Вызывается когда добавляется реакция
 @bot.event
-async def on_raw_reaction_add(self, payload):
+async def on_raw_reaction_add(payload):
     if payload.message_id == config.POST_ID:
         channel = self.get_channel(payload.channel_id) # получаем объект канала
         message = await channel.fetch_message(payload.message_id) # получаем объект сообщения
@@ -44,7 +44,7 @@ async def on_raw_reaction_add(self, payload):
 
 # Вызывается когда удаляется реакция
 @bot.event
-async def on_raw_reaction_remove(self, payload):
+async def on_raw_reaction_remove(payload):
     channel = self.get_channel(payload.channel_id) # получаем объект канала
     message = await channel.fetch_message(payload.message_id) # получаем объект сообщения
     member = utils.get(message.guild.members, id=payload.user_id) # получаем объект пользователя который поставил реакцию
