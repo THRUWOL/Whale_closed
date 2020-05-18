@@ -67,4 +67,5 @@ class MyClient(discord.Client):
 async def cls(ctx, amount = 1):
     await ctx.channel.purge(limit = amount)
 
+bot = MyClient(command_prefix = '.')
 bot.run(os.environ.get('BOT_TOKEN'))
