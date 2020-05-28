@@ -10,10 +10,12 @@ import os
 
 client = discord.Client()
 
+# Проверка работоспособности
 @client.event
 async def on_ready():
     print("Bot is logged in")
 
+# Выдать роль
 @client.event
 async def on_raw_reaction_add(payload):
     message_id = payload.message_id
@@ -48,6 +50,7 @@ async def on_raw_reaction_add(payload):
         else:
             print("Role not found")
 
+# Убрать роль
 @client.event
 async def on_raw_reaction_remove(payload):
     message_id = payload.message_id
@@ -82,4 +85,5 @@ async def on_raw_reaction_remove(payload):
         else:
             print("Role not found")
 
+# Запуск бота
 client.run(os.environ.get('BOT_TOKEN'))
