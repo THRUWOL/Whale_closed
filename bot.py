@@ -101,7 +101,7 @@ async def mute(ctx, member:discord.Member, time:int, reason):
     await member.add_roles(mute_role)
     await ctx.send(embed = emb)
     await asyncio.sleep(time*60)
-    await member_remove_roles(mute_role)
+    await member.remove_roles(mute_role)
 
 # Запуск бота
 Bot.run(os.environ.get('BOT_TOKEN'))
