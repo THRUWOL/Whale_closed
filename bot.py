@@ -4,61 +4,65 @@ last update: 15 may 2020
 
 by Nikita [thruwol] Yarosh
 '''
-import config
+
 import discord
-import os
-from discord import utils
-from discord.ext import commands
-from discord.utils import get
 
-class MyClient(discord.Client):
-    # Выводит информацию об успешном подключении
+client = discord.Client()
 
-    async def on_ready(self):
-        print('Бот успешно подключился к серверу'.format(self.user))
+@client.event
+async def on_ready():
+    print("Bot is logged in")
 
-    # Вызывается когда добавляется реакция
+@client.event
+async def on_raw_reaction_add(payload):
+    message_id = payload.message_id
+    if message_id == 711626944608993340:
+        guild_id = payload.guild_id
+        guild = discord.utils.find(lambda g : g.id == guild_id, cient.guilds)
 
-    async def on_raw_reaction_add(self, payload):
-        if payload.message_id == config.POST_ID:
-            channel = self.get_channel(payload.channel_id) # получаем объект канала
-            message = await channel.fetch_message(payload.message_id) # получаем объект сообщения
-            member = utils.get(message.guild.members, id=payload.user_id) # получаем объект пользователя который поставил реакцию
+        if payload.emoji.name == 'cpp':
+            print("C++ Role")
+            role = discord.utils.get(guild.roles, name='C++')
+        elif payload.emoji.name == 'clang':
+            print("C Role")
+            role = discord.utils.get(guild.roles, name='C')
+        else:
+            role = discord.utils.get(guild.roles, name=payload.emoji.name)
 
-            try:
-                emoji = str(payload.emoji) # эмоджик который выбрал юзер
-                role = utils.get(message.guild.roles, id=config.ROLES[emoji]) # объект выбранной роли (если есть)
+        if role is not None:
+            member = discord.utils.find(lambda m : m.id == payload.user_id, guild.members)
+            if member is not None:
+                await member.add_roles(role)
+                print("done")
+            else:
+                print("Member not found")
+        else:
+            print("Role not found")
 
-                if(len([i for i in member.roles if i.id not in config.EXCROLES]) <= config.MAX_ROLES_PER_USER):
-                    await member.add_roles(role)
-                    print('[SUCCESS]  {0.display_name} has been granted with role {1.name}'.format(member, role))
-                else:
-                    await message.remove_reaction(payload.emoji, member)
-                    print('[ERROR] Too many roles for user {0.display_name}'.format(member))
+@client.event
+async def on_raw_reaction_remove(payload):
+    message_id = payload.message_id
+    if message_id == 711626944608993340:
+        guild_id = payload.guild_id
+        guild = discord.utils.find(lambda g : g.id == guild_id, cient.guilds)
 
-            except KeyError as e:
-                print('[ERROR] KeyError, no role found for ' + emoji)
-            except Exception as e:
-                print(repr(e))
+        if payload.emoji.name == 'cpp':
+            print("C++ Role")
+            role = discord.utils.get(guild.roles, name='C++')
+        elif payload.emoji.name == 'clang':
+            print("C Role")
+            role = discord.utils.get(guild.roles, name='C')
+        else:
+            role = discord.utils.get(guild.roles, name=payload.emoji.name)
 
-    # Вызывается когда удаляется реакция
+        if role is not None:
+            member = discord.utils.find(lambda m : m.id == payload.user_id, guild.members)
+            if member is not None:
+                await member.remove_roles(role)
+                print("done")
+            else:
+                print("Member not found")
+        else:
+            print("Role not found")
 
-    async def on_raw_reaction_remove(self, payload):
-        channel = self.get_channel(payload.channel_id) # получаем объект канала
-        message = await channel.fetch_message(payload.message_id) # получаем объект сообщения
-        member = utils.get(message.guild.members, id=payload.user_id) # получаем объект пользователя который поставил реакцию
-
-        try:
-            emoji = str(payload.emoji) # эмоджик который выбрал юзер
-            role = utils.get(message.guild.roles, id=config.ROLES[emoji]) # объект выбранной роли (если есть)
-
-            await member.remove_roles(role)
-            print('[SUCCESS] Role {1.name} has been remove for user {0.display_name}'.format(member, role))
-
-        except KeyError as e:
-            print('[ERROR] KeyError, no role found for ' + emoji)
-        except Exception as e:
-            print(repr(e))
-
-bot = MyClient()
 bot.run(os.environ.get('BOT_TOKEN'))
