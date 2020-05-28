@@ -87,6 +87,7 @@ async def on_raw_reaction_remove(payload):
         else:
             print("Role not found")
 
+# Выдать мут
 @client.command()
 @commands.has_permissions(view_audit_log=True)
 async def mute(ctx, member:discord.Member, time:int, reason):
