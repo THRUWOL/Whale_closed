@@ -1,6 +1,6 @@
 '''
 Python bot for Discord
-last update: 15 may 2020
+last update: 28 may 2020
 
 by Nikita [thruwol] Yarosh
 '''
@@ -19,7 +19,7 @@ async def on_raw_reaction_add(payload):
     message_id = payload.message_id
     if message_id == 711626944608993340:
         guild_id = payload.guild_id
-        guild = discord.utils.find(lambda g : g.id == guild_id, cient.guilds)
+        guild = discord.utils.find(lambda g : g.id == guild_id, client.guilds)
 
         if payload.emoji.name == 'cpp':
             print("C++ Role")
@@ -45,7 +45,7 @@ async def on_raw_reaction_remove(payload):
     message_id = payload.message_id
     if message_id == 711626944608993340:
         guild_id = payload.guild_id
-        guild = discord.utils.find(lambda g : g.id == guild_id, cient.guilds)
+        guild = discord.utils.find(lambda g : g.id == guild_id, client.guilds)
 
         if payload.emoji.name == 'cpp':
             print("C++ Role")
