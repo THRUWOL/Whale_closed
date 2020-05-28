@@ -21,7 +21,7 @@ async def on_raw_reaction_add(payload):
         guild_id = payload.guild_id
         guild = discord.utils.find(lambda g : g.id == guild_id, client.guilds)
 
-        if payload.emoji.name == 'rainbow':
+        if payload.emoji.name == 'cpp':
             print("C++ Role")
             role = discord.utils.get(guild.roles, name='программист')
         elif payload.emoji.name == 'clang':
