@@ -21,12 +21,20 @@ async def on_raw_reaction_add(payload):
         guild_id = payload.guild_id
         guild = discord.utils.find(lambda g : g.id == guild_id, client.guilds)
 
-        if payload.emoji.name == 'cpp':
-            print("C++ Role")
+        if payload.emoji.name == 'ratblanket':
+            role = discord.utils.get(guild.roles, name='крыска')
+        elif payload.emoji.name == 'gamer':
+            role = discord.utils.get(guild.roles, name='геймер')
+        elif payload.emoji.name == 'streamer':
+            role = discord.utils.get(guild.roles, name='стример')
+        elif payload.emoji.name == 'cyberclown':
+            role = discord.utils.get(guild.roles, name='cyberclown')
+        elif payload.emoji.name == 'music':
+            role = discord.utils.get(guild.roles, name='музыкант')
+        elif payload.emoji.name == 'art':
+            role = discord.utils.get(guild.roles, name='художник')
+        elif payload.emoji.name == 'prog':
             role = discord.utils.get(guild.roles, name='программист')
-        elif payload.emoji.name == 'clang':
-            print("C Role")
-            role = discord.utils.get(guild.roles, name='C')
         else:
             role = discord.utils.get(guild.roles, name=payload.emoji.name)
 
@@ -47,12 +55,20 @@ async def on_raw_reaction_remove(payload):
         guild_id = payload.guild_id
         guild = discord.utils.find(lambda g : g.id == guild_id, client.guilds)
 
-        if payload.emoji.name == 'cpp':
-            print("C++ Role")
-            role = discord.utils.get(guild.roles, name='C++')
-        elif payload.emoji.name == 'clang':
-            print("C Role")
-            role = discord.utils.get(guild.roles, name='C')
+        if payload.emoji.name == 'ratblanket':
+            role = discord.utils.get(guild.roles, name='крыска')
+        elif payload.emoji.name == 'gamer':
+            role = discord.utils.get(guild.roles, name='геймер')
+        elif payload.emoji.name == 'streamer':
+            role = discord.utils.get(guild.roles, name='стример')
+        elif payload.emoji.name == 'cyberclown':
+            role = discord.utils.get(guild.roles, name='cyberclown')
+        elif payload.emoji.name == 'music':
+            role = discord.utils.get(guild.roles, name='музыкант')
+        elif payload.emoji.name == 'art':
+            role = discord.utils.get(guild.roles, name='художник')
+        elif payload.emoji.name == 'prog':
+            role = discord.utils.get(guild.roles, name='программист')
         else:
             role = discord.utils.get(guild.roles, name=payload.emoji.name)
 
