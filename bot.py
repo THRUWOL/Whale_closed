@@ -6,6 +6,7 @@ by Nikita [thruwol] Yarosh
 '''
 
 import discord
+import os
 
 client = discord.Client()
 
