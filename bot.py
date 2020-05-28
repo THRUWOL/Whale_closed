@@ -24,7 +24,7 @@ async def on_raw_reaction_add(payload):
     message_id = payload.message_id
     if message_id == 715454105706823731:
         guild_id = payload.guild_id
-        guild = discord.utils.find(lambda g : g.id == guild_id, client.guilds)
+        guild = discord.utils.find(lambda g : g.id == guild_id, Bot.guilds)
 
         if payload.emoji.name == 'ratblanket':
             role = discord.utils.get(guild.roles, name='крыска')
@@ -59,7 +59,7 @@ async def on_raw_reaction_remove(payload):
     message_id = payload.message_id
     if message_id == 715454105706823731:
         guild_id = payload.guild_id
-        guild = discord.utils.find(lambda g : g.id == guild_id, client.guilds)
+        guild = discord.utils.find(lambda g : g.id == guild_id, Bot.guilds)
 
         if payload.emoji.name == 'ratblanket':
             role = discord.utils.get(guild.roles, name='крыска')
@@ -93,7 +93,7 @@ async def on_raw_reaction_remove(payload):
 @commands.has_permissions(view_audit_log=True)
 async def mute(ctx, member:discord.Member, time:int, reason):
     mute_role = discord.utils.get(ctx.guild.roles, id=715471240080654477)
-    emb = discotd.Embed(title="Мут", color=0xff0000)
+    emb = discord.Embed(title="Мут", color=0xff0000)
     emb.add_field(name='Модератор',value=ctx.message.author.mention,inline=False)
     emb.add_field(name='Нарушитель', value= member.mention,inline=False)
     emb.add_field(name='Причина', value=reason,inline=False)
