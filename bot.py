@@ -9,16 +9,17 @@ import discord
 import os
 import asyncio
 from discord.ext import commands
+from discord.ext.commands import Bot
 
-client = discord.Client(command_prefix = '.')
+Bot = commands.Bot(command_prefix = '.')
 
 # Проверка работоспособности
-@client.event
+@Bot.event
 async def on_ready():
     print("Bot is logged in")
 
 # Выдать роль
-@client.event
+@Bot.event
 async def on_raw_reaction_add(payload):
     message_id = payload.message_id
     if message_id == 715454105706823731:
@@ -53,7 +54,7 @@ async def on_raw_reaction_add(payload):
             print("Role not found")
 
 # Убрать роль
-@client.event
+@Bot.event
 async def on_raw_reaction_remove(payload):
     message_id = payload.message_id
     if message_id == 715454105706823731:
@@ -88,7 +89,7 @@ async def on_raw_reaction_remove(payload):
             print("Role not found")
 
 # Выдать мут
-@client.command()
+@Bot.command()
 @commands.has_permissions(view_audit_log=True)
 async def mute(ctx, member:discord.Member, time:int, reason):
     mute_role = discord.utils.get(ctx.guild.roles, id=715471240080654477)
@@ -103,4 +104,4 @@ async def mute(ctx, member:discord.Member, time:int, reason):
     await member_remove_roles(mute_role)
 
 # Запуск бота
-client.run(os.environ.get('BOT_TOKEN'))
+Bot.run(os.environ.get('BOT_TOKEN'))
