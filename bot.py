@@ -116,5 +116,11 @@ async def unmute(ctx, member:discord.Member):
     await channel.send(embed = emb)
     await member.remove_roles(mute_role)
 
+# Очистка сообщений
+@Bot.command()
+@commands.has_permissions(view_audit_log=True)
+async def clear(ctx,amount=1):
+    deleted = await ctx.message.channel.purge(limit=amount + 1)
+
 # Запуск бота
 Bot.run(os.environ.get('BOT_TOKEN'))
