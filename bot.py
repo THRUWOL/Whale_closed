@@ -92,14 +92,15 @@ async def on_raw_reaction_remove(payload):
 @Bot.command()
 @commands.has_permissions(view_audit_log=True)
 async def mute(ctx, member:discord.Member, time:int, reason):
+    channel = Bot.get_channel(715795576599478325)
     mute_role = discord.utils.get(ctx.guild.roles, id=715471240080654477)
     emb = discord.Embed(title="Мут", color=0xff0000)
     emb.add_field(name='Модератор',value=ctx.message.author.mention,inline=False)
     emb.add_field(name='Нарушитель', value= member.mention,inline=False)
     emb.add_field(name='Причина', value=reason,inline=False)
-    emb.add_field(name='Время',value=time,inline=False)
+    emb.add_field(name='Время(мин.)',value=time,inline=False)
     await member.add_roles(mute_role)
-    await ctx.send(embed = emb)
+    await channel.send(embed = emb)
     await asyncio.sleep(time*60)
     await member.remove_roles(mute_role)
 
