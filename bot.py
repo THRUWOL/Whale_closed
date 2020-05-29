@@ -104,23 +104,5 @@ async def mute(ctx, member:discord.Member, time:int, reason):
     await asyncio.sleep(time*60)
     await member.remove_roles(mute_role)
 
-# Убрать из мута
-@Bot.command()
-@commands.has_permissions(view_audit_log=True)
-async def unmute(ctx, member:discord.Member):
-    channel = Bot.get_channel(715795576599478325)
-    mute_role = discord.utils.get(ctx.guild.roles, id=715471240080654477)
-    emb = discord.Embed(title="Анмут", color=0x00ff00)
-    emb.add_field(name='Модератор',value=ctx.message.author.mention,inline=False)
-    emb.add_field(name='Нарушитель', value= member.mention,inline=False)
-    await channel.send(embed = emb)
-    await member.remove_roles(mute_role)
-
-# Очистка сообщений
-@Bot.command()
-@commands.has_permissions(view_audit_log=True)
-async def clear(ctx,amount=1):
-    deleted = await ctx.message.channel.purge(limit=amount + 1)
-
 # Запуск бота
 Bot.run(os.environ.get('BOT_TOKEN'))
