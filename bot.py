@@ -85,7 +85,7 @@ async def on_raw_reaction_remove(payload):
                 print("done")
             else:
                 print("Member not found")
-        else:
+        else:z
             print("Role not found")
 
 # Выдать мут
@@ -102,6 +102,7 @@ async def mute(ctx, member:discord.Member, time:int, reason):
     await ctx.send(embed = emb)
     await asyncio.sleep(time*60)
     await member.remove_roles(mute_role)
+
 
 # Запуск бота
 Bot.run(os.environ.get('BOT_TOKEN'))

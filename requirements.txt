@@ -1,4 +1,2 @@
 discord.py
-wheel
-bs4
-requests
+asyncio
