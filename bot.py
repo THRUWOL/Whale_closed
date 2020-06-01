@@ -85,7 +85,7 @@ async def on_raw_reaction_remove(payload):
                 print("done")
             else:
                 print("Member not found")
-        else:z
+        else:
             print("Role not found")
 
 # Выдать мут
