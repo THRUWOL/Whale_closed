@@ -7,19 +7,17 @@ by Nikita [thruwol] Yarosh
 
 import discord
 import os
-import asyncio
 from discord.ext import commands
-from discord.ext.commands import Bot
 
-Bot = commands.Bot(command_prefix = '.')
+client = commands.Bot(command_prefix = '.')
 
 # Проверка работоспособности
-@Bot.event
+@client.event
 async def on_ready():
     print("Bot is logged in")
 
 # Выдать роль
-@Bot.event
+@client.event
 async def on_raw_reaction_add(payload):
     message_id = payload.message_id
     if message_id == 715454105706823731:
@@ -54,7 +52,7 @@ async def on_raw_reaction_add(payload):
             print("Role not found")
 
 # Убрать роль
-@Bot.event
+@client.event
 async def on_raw_reaction_remove(payload):
     message_id = payload.message_id
     if message_id == 715454105706823731:
@@ -89,20 +87,26 @@ async def on_raw_reaction_remove(payload):
             print("Role not found")
 
 # Выдать мут
-@Bot.command()
-@commands.has_permissions(view_audit_log=True)
-async def mute(ctx, member:discord.Member, time:int, reason):
-    mute_role = discord.utils.get(ctx.guild.roles, id=715471240080654477)
-    emb = discord.Embed(title="Мут", color=0xff0000)
-    emb.add_field(name='Модератор',value=ctx.message.author.mention,inline=False)
-    emb.add_field(name='Нарушитель', value= member.mention,inline=False)
-    emb.add_field(name='Причина', value=reason,inline=False)
-    emb.add_field(name='Время',value=time,inline=False)
+@client.command()
+@commands.has_permissions(administrator = True)
+async def mute(ctx, member: discord.Member):
+    await ctx.channel.purge(limit = 1)
+
+    mute_role = discord.utils.get(ctx.message.guild.roles, name = 'mute')
+
     await member.add_roles(mute_role)
-    await ctx.send(embed = emb)
-    await asyncio.sleep(time*60)
+    await ctx.send(f'У {member.mention}, ограничение чата за нарушение прав!')
+
+# Убрать мут
+@client.command()
+@commands.has_permissions(administrator = True)
+async def mute(ctx, member: discord.Member):
+    await ctx.channel.purge(limit = 1)
+
+    mute_role = discord.utils.get(ctx.message.guild.roles, name = 'mute')
+
     await member.remove_roles(mute_role)
 
 
 # Запуск бота
-Bot.run(os.environ.get('BOT_TOKEN'))
+client.run(os.environ.get('BOT_TOKEN'))
