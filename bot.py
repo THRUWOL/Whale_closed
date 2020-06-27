@@ -86,27 +86,5 @@ async def on_raw_reaction_remove(payload):
         else:
             print("Role not found")
 
-# Выдать мут
-@client.command()
-@commands.has_permissions(administrator = True)
-async def mute(ctx, member: discord.Member):
-    await ctx.channel.purge(limit = 1)
-
-    mute_role = discord.utils.get(ctx.message.guild.roles, name = 'mute')
-
-    await member.add_roles(mute_role)
-    await ctx.send(f'У {member.mention}, ограничение чата за нарушение прав!')
-
-# Убрать мут
-@client.command()
-@commands.has_permissions(administrator = True)
-async def unmute(ctx, member: discord.Member):
-    await ctx.channel.purge(limit = 1)
-
-    mute_role = discord.utils.get(ctx.message.guild.roles, name = 'mute')
-
-    await member.remove_roles(mute_role)
-
-
 # Запуск бота
 client.run(os.environ.get('BOT_TOKEN'))
