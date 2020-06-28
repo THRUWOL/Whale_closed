@@ -12,7 +12,7 @@ from discord.ext import commands
 PREFIX = '.'
 
 client = commands.Bot(command_prefix = PREFIX)
-client.remove_command(.help)
+client.remove_command('help')
 
 ID = 715454105706823731;
 
