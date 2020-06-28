@@ -97,7 +97,7 @@ async def on_raw_reaction_remove(payload):
 async def help( ctx ):
     emb = discord.Embed( title = 'Навигация по командам')
 
-    emb.add_field(name = '{}clear'.format( PREFIX ), value = 'Очистка чата')
+    emb.add_field(name = '{}pizda'.format( PREFIX ), value = 'Зачем открыл? Это тест')
 
     await ctx.send( embed = emb )
 
