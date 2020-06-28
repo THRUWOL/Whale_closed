@@ -7,7 +7,6 @@ by Nikita [thruwol] Yarosh
 
 import discord
 import os
-import asyncio
 from discord.ext import commands
 
 PREFIX = '.'
@@ -22,13 +21,7 @@ ID = 715454105706823731;
 async def on_ready():
     print("Bot is logged in")
 
-async def status_task():
-
-    while True:
-        await client.change_presence( activity = discord.Game('.help'), status = discord.Status.online)
-        await asyncio.sleep(5)
-        await client.change_presence( activity = discord.Game('https://vk.com/cybertent'), status = discord.Status.online)
-        await asyncio.sleep(5)
+    await client.change_presence( status = discord.Status.online, activity = discord.Game('.help'))
 
 # Выдать роль
 @client.event
