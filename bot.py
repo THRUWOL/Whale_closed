@@ -7,6 +7,7 @@ by Nikita [thruwol] Yarosh
 
 import discord
 import os
+import asyncio
 from discord.ext import commands
 
 PREFIX = '.'
