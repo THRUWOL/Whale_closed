@@ -1,6 +1,6 @@
 '''
 Python bot for Discord
-last update: 28 may 2020
+last update: 28 june 2020
 
 by Nikita [thruwol] Yarosh
 '''
