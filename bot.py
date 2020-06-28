@@ -9,7 +9,11 @@ import discord
 import os
 from discord.ext import commands
 
-client = commands.Bot(command_prefix = '.')
+PREFIX = '.'
+
+client = commands.Bot(command_prefix = PREFIX)
+client.remove_command(.help)
+
 ID = 715454105706823731;
 
 # Проверка работоспособности
@@ -88,6 +92,14 @@ async def on_raw_reaction_remove(payload):
                 print("Member not found")
         else:
             print("Role not found")
+
+@client.command( pass_context = True)
+async def help( ctx ):
+    emb = discord.Embed( title = 'Навигация по командам')
+
+    emb.add_field(name = '{}clear'.clear( PREFIX ), value = 'Очистка чата')
+
+    await ctx.send( embed = emb )
 
 # Запуск бота
 client.run(os.environ.get('BOT_TOKEN'))
