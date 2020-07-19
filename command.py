@@ -205,6 +205,72 @@ class helped(commands.Cog):
                 pass
         await ctx.send(embed = embed)
         print(f"[shop]:[{ctx.author}] вывел информацию о товарах в магазине")
-
+# Вывод команд сервера
+    @commands.command()
+    async def help(self,ctx):
+        embed1 = discord.Embed(title = 'Команды пользователя', description = '.balance - узнать баланс конфет на своём счёту \n\n.balance @ник - узнать баланс другого пользователя \n\n.rep - узнать свою репутацию \n\n.rep @ник - узнать репутацию другого пользователя \n\n.lvl - получить информацию о своём уровне \n\n.lvl @ник - получить информацию о уровне другого пользователя \n\n.shop - открыть магазин \n\n.buy @роль - купить @роль в магазине\n\n .leaderboard - вывод рейтинговой таблицы \n\n .user_info @ник - вывод полной статистики пользователя')
+        embed2 = discord.Embed(title = 'Игровые команды', description = 'КНБ - камень, ножницы, бумага \n\n.roll_start @имя - вызвать игрока на бой в КНБ \n\n.rollend @имя - принять вызов другого пользователя в КНБ \n\n.roll_stats - узнать свою статистику в КНБ \n\n.roll_stats - узнать статистику другого игрока в КНБ \n\n .rpg_battle - начать бой с монстром \n\n .atack - атаковать монстра \n\n')
+        embed4 = discord.Embed(title = 'Команды администратора', description = '.award @ник N - дать пользователю N конфет \n\n.take @ник N - отнять у пользователя N конфет \n\n.take @ник all - отнять у пользователя все конфеты \n\n.shop_add @роль N - добавить в магазин @роль стоимостью N конфет \n\n.shop_remove @роль - убрать с магазина @роль \n\n')
+        embed3 = discord.Embed(title = 'Команды помощника', description ='.clear N - очистка чата на N сообщений \n\n .rep_down @имя - снизить репутацию пользователя на 1 \n\n.rep_up @имя - повысить репутацию пользователя на 1')
+        embeds = [embed1, embed2, embed3, embed4]
+        message = await ctx.send(embed = embed1)
+        page = pag(self.bot, message, use_more=False, color = 0x7fc7ff, footer = False, embeds = embeds)
+        print(f"[help]:[{ctx.author}] вывел информацию о командах сервера")
+        await page.start()
+# Вывод информации о пользователе
+    @commands.command()
+    async def user_info(self,ctx,member: discord.Member = None):
+        embed1 = discord.Embed(
+            title = f'Информация о пользователе',
+            description = f'**Ник в дискорде:** {member}\n**Ник на сервере:** {member.display_name}\n **Репутация:** {cursor.execute("SELECT rep FROM users WHERE id = {}".format(member.id)).fetchone()[0]} <a:Rainbow_Heart:733734474725982338>\n **Баланс:** {cursor.execute("SELECT cash FROM users WHERE id = {}".format(member.id)).fetchone()[0]} <a:Coin:733734700098781205>\n **Опыт:** {cursor.execute("SELECT exp FROM users WHERE id = {}".format(member.id)).fetchone()[0]} <a:star_red:733736417523531798>\n **Уровень:** {cursor.execute("SELECT lvl FROM users WHERE id = {}".format(member.id)).fetchone()[0]}\n **Высшая роль:** {member.top_role.mention}\n')   
+        embed1.set_thumbnail(url = member.avatar_url)
+        embed1.set_footer(text = f"Запрос от пользователя {ctx.author}", icon_url=ctx.author.avatar_url)
+        embed2 = discord.Embed(
+            title = f'Статистика в КНБ',
+            description = f'**Победы:** {cursor.execute("SELECT victories FROM users WHERE id = {}".format(member.id)).fetchone()[0]}\n **Поражения:** {cursor.execute("SELECT defeats FROM users WHERE id = {}".format(member.id)).fetchone()[0]}\n **Ничья:** {cursor.execute("SELECT draw FROM users WHERE id = {}".format(member.id)).fetchone()[0]}')
+        embed2.set_thumbnail(url = member.avatar_url)
+        embed2.set_footer(text = f"Запрос от пользователя {ctx.author}", icon_url=ctx.author.avatar_url)
+        embed3 = discord.Embed(
+            title = f'Достижения[beta]',
+            description = f'Скоро появятся...'
+        )
+        embeds = [embed1, embed2, embed3]
+        message = await ctx.send(embed = embed1)
+        page = pag(self.bot, message, use_more = False, color = member.color, footer= False, embeds = embeds, timeout = 60)
+        await page.start()
+# Вывод доски почёта (5 пользователей)
+    @commands.command()
+    async def leaderboard(self,ctx):
+        embed1 = discord.Embed(title = 'Богачи сервера')
+        counter = 0
+        for row in cursor.execute("SELECT name, cash FROM users WHERE server_id = {} ORDER BY cash DESC LIMIT 5".format(ctx.guild.id)):
+            counter += 1
+            embed1.add_field(
+                name = f'{counter} | {row[0]}',
+                value = f'Баланс: {row[1]} <a:Coin:733734700098781205>',
+                inline = False
+            )
+        embed2 = discord.Embed(title = 'Качки сервера')
+        counter = 0
+        for row in cursor.execute("SELECT name, exp, lvl FROM users WHERE server_id = {} ORDER BY exp DESC LIMIT 5".format(ctx.guild.id)):
+            counter += 1
+            embed2.add_field(
+                name = f'{counter} | {row[0]}',
+                value = f'Уровень: {row[2]} | Опыт: {row[1]} <a:star_red:733736417523531798>',
+                inline = False
+            )
+        embed3 = discord.Embed(title = 'Порядочное общество')
+        counter = 0
+        for row in cursor.execute("SELECT name, rep FROM users WHERE server_id = {} ORDER BY rep DESC LIMIT 5".format(ctx.guild.id)):
+            counter += 1
+            embed3.add_field(
+                name = f'{counter} | {row[0]}',
+                value = f'Репутация: {row[1]} <a:Rainbow_Heart:733734474725982338>',
+                inline = False
+            )
+        embeds = [embed1, embed2, embed3]
+        message = await ctx.send(embed = embed1)
+        page = pag(self.bot, message, use_more = False, color = 0xff4d00, footer = False, embeds = embeds, timeout = 60)
+        await page.start()
 def setup(bot):
     bot.add_cog(helped(bot))
