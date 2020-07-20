@@ -57,7 +57,7 @@ class database(commands.Cog):
             monster_health INT
         )""")
         connection.commit()
- #Создание таблицы rpg_users
+#Создание таблицы rpg_users
         cursor.execute("""CREATE TABLE IF NOT EXISTS rpg_users (
             name TEXT,
             id INT,
@@ -67,7 +67,7 @@ class database(commands.Cog):
             armor INT
         )""")
         connection.commit()
- #Создание таблицы rpg_battle
+#Создание таблицы rpg_battle
         cursor.execute("""CREATE TABLE IF NOT EXISTS rpg_battle (
             name TEXT,
             id INT,
@@ -77,6 +77,12 @@ class database(commands.Cog):
             user_damage INT
         )""")
         connection.commit()
+#Создание таблицы config
+        cursor.execute("""CREATE TABLE IF NOT EXISTS config (
+            reaction_message_id BIGINT,
+            rpg_ID BIGINT,
+            rps_ID BIGINT
+        )""")
         for guild in self.bot.guilds:
             for member in guild.members:
                 if cursor.execute(f"SELECT id FROM rpg_users WHERE id = {member.id}").fetchone() is None:
@@ -104,4 +110,5 @@ class database(commands.Cog):
             pass
         connection.commit()
 def setup(bot):
+    print("db.py ✅")
     bot.add_cog(database(bot))

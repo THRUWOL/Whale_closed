@@ -120,4 +120,5 @@ class rps_play(commands.Cog):
             ))
             print(f"[stats]:Пользователь [{ctx.author}] вывел игровую статистику пользователя [{member}]")
 def setup(bot):
+    print("rps.py ✅")
     bot.add_cog(rps_play(bot))

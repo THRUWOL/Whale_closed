@@ -272,5 +272,10 @@ class helped(commands.Cog):
         message = await ctx.send(embed = embed1)
         page = pag(self.bot, message, use_more = False, color = 0xff4d00, footer = False, embeds = embeds, timeout = 60)
         await page.start()
+# Вывод аватарки пользователя
+    @commands.command()
+    async def avatar(self,ctx,member: discord.Member):
+        await ctx.send('{}'.format(member.avatar_url))
 def setup(bot):
+    print("command.py ✅")
     bot.add_cog(helped(bot))

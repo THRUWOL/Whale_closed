@@ -39,6 +39,7 @@ class rpg_play(commands.Cog):
             cursor.execute("INSERT INTO rpg_battle VALUES('{}', {}, {}, {}, {}, {})".format(ctx.author, ctx.author.id, cursor.execute("SELECT rowid FROM rpg_monster WHERE rowid = {}".format(monster)).fetchone()[0], cursor.execute("SELECT monster_health FROM rpg_monster WHERE rowid = {}".format(monster)).fetchone()[0], cursor.execute("SELECT monster_damage FROM rpg_monster WHERE rowid = {}".format(monster)).fetchone()[0], cursor.execute("SELECT damage FROM rpg_users WHERE id = {}".format(ctx.author.id)).fetchone()[0]))
         else:
             await ctx.send(f"Сначала разберись с прошлым противником")
+        connection.commit()
 # Ударить монстра
     @commands.command()
     async def atack(self,ctx):
@@ -68,5 +69,7 @@ class rpg_play(commands.Cog):
             else:
                 await ctx.send(f"Монстр убит")
                 cursor.execute(f"DELETE FROM rpg_battle WHERE id = {ctx.author.id}")
+        connection.commit()
 def setup(bot):
+    print("rpg.py ✅")
     bot.add_cog(rpg_play(bot))

@@ -81,4 +81,5 @@ class roles(commands.Cog):
             else:
                 print("[drop_roles]:Роль не найдена")
 def setup(bot):
+    print("roles_reaction.py ✅")
     bot.add_cog(roles(bot))
