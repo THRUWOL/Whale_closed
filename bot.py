@@ -18,7 +18,7 @@ async def on_ready():
     await client.change_presence(activity=discord.Activity(type = discord.ActivityType.listening, name = ".help"))
     print("[bot_status]:Статус бота активен")
 
-extensions = ['command','roles_reaction','db','rps','rpg','xp']
+extensions = ['commands','roles_reaction','db','rps','rpg','xp']
 
 if __name__ == '__main__':
     for ext in extensions:

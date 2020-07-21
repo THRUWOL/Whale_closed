@@ -13,7 +13,7 @@ from Cybernator import Paginator as pag
 connection = sqlite3.connect('server.db')
 cursor = connection.cursor()
 
-class roles(commands.Cog):
+class role_events(commands.Cog):
     def __init__(self,bot):
         self.bot = bot
 # Выдача роли по реакции
@@ -82,4 +82,4 @@ class roles(commands.Cog):
                 print("[drop_roles]:Роль не найдена")
 def setup(bot):
     print("roles_reaction.py ✅")
-    bot.add_cog(roles(bot))
+    bot.add_cog(role_events(bot))

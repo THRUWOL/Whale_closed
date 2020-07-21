@@ -13,7 +13,7 @@ from Cybernator import Paginator as pag
 connection = sqlite3.connect('server.db')
 cursor = connection.cursor()
 
-class rpg_play(commands.Cog):
+class rpg_commands(commands.Cog):
     def __init__(self,bot):
         self.bot = bot
 # Вызов монстра на бой
@@ -72,4 +72,4 @@ class rpg_play(commands.Cog):
         connection.commit()
 def setup(bot):
     print("rpg.py ✅")
-    bot.add_cog(rpg_play(bot))
+    bot.add_cog(rpg_commands(bot))

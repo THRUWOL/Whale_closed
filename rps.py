@@ -13,7 +13,7 @@ from Cybernator import Paginator as pag
 connection = sqlite3.connect('server.db')
 cursor = connection.cursor()
 
-class rps_play(commands.Cog):
+class rps_commands(commands.Cog):
     def __init__(self,bot):
         self.bot = bot
 # КаменьНожницыБумага (кинуть вызов)
@@ -121,4 +121,4 @@ class rps_play(commands.Cog):
             print(f"[stats]:Пользователь [{ctx.author}] вывел игровую статистику пользователя [{member}]")
 def setup(bot):
     print("rps.py ✅")
-    bot.add_cog(rps_play(bot))
+    bot.add_cog(rps_commands(bot))

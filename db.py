@@ -13,7 +13,7 @@ from Cybernator import Paginator as pag
 connection = sqlite3.connect('server.db')
 cursor = connection.cursor()
 
-class database(commands.Cog):
+class db_events(commands.Cog):
     def __init__(self,bot):
         self.bot = bot
     @commands.Cog.listener()
@@ -111,4 +111,4 @@ class database(commands.Cog):
         connection.commit()
 def setup(bot):
     print("db.py ✅")
-    bot.add_cog(database(bot))
+    bot.add_cog(db_events(bot))

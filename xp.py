@@ -13,7 +13,7 @@ from Cybernator import Paginator as pag
 connection = sqlite3.connect('server.db')
 cursor = connection.cursor()
 
-class xp(commands.Cog):
+class xp_events(commands.Cog):
     def __init__(self,bot):
         self.bot = bot
 # Выдача уровня за сообщение
@@ -37,8 +37,8 @@ class xp(commands.Cog):
                     bal = 1000*lv
                     cursor.execute(f"UPDATE users SET lvl={lv}, cash= cash +{bal} where id = {message.author.id}")
                     print(f"[lvl_up]:[{message.author.name}] получил уровень {lv}")
-            await self.bot.process_commands(message)
+            #await self.bot.process_commands(message)
             connection.commit()
 def setup(bot):
     print("xp.py ✅")
-    bot.add_cog(xp(bot))
+    bot.add_cog(xp_events(bot))

@@ -13,7 +13,7 @@ from Cybernator import Paginator as pag
 connection = sqlite3.connect('server.db')
 cursor = connection.cursor()
 
-class helped(commands.Cog):
+class all_commands(commands.Cog):
     def __init__(self,bot):
         self.bot = bot
 # Вывод анимированной задницы (команда администратора)
@@ -277,5 +277,5 @@ class helped(commands.Cog):
     async def avatar(self,ctx,member: discord.Member):
         await ctx.send('{}'.format(member.avatar_url))
 def setup(bot):
-    print("command.py ✅")
-    bot.add_cog(helped(bot))
+    print("commands.py ✅")
+    bot.add_cog(all_commands(bot))
