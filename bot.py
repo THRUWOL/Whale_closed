@@ -4,21 +4,16 @@ import sqlite3
 import random
 import os
 
-import config
+import setting.token as token
 
 from discord.ext import commands
 from discord import Member, Guild
 from Cybernator import Paginator as pag
 
-client = commands.Bot(command_prefix = config.PREFIX)
+client = commands.Bot(command_prefix = '.')
 client.remove_command('help')
 
-@client.event
-async def on_ready():
-    await client.change_presence(activity=discord.Activity(type = discord.ActivityType.listening, name = ".help"))
-    print("[bot_status]:Статус бота активен")
-
-extensions = ['commands','roles_reaction','db','rps','rpg','xp']
+extensions = ['setting.db','events.status','setting.configs','commands.commands','events.roles_reaction','games.rps','games.rpg']
 
 if __name__ == '__main__':
     for ext in extensions:
@@ -26,4 +21,4 @@ if __name__ == '__main__':
 
 print("bot.py ✅")
 print("~~~Кит поплыл~~~")
-client.run(config.TOKEN)
+client.run(token.TOKEN)

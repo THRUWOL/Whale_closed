@@ -4,8 +4,6 @@ import sqlite3
 import random
 import os
 
-import config
-
 from discord.ext import commands
 from discord import Member, Guild
 from Cybernator import Paginator as pag

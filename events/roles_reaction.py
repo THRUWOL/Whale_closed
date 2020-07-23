@@ -4,8 +4,6 @@ import sqlite3
 import random
 import os
 
-import config
-
 from discord.ext import commands
 from discord import Member, Guild
 from Cybernator import Paginator as pag
@@ -20,7 +18,7 @@ class role_events(commands.Cog):
     @commands.Cog.listener()
     async def on_raw_reaction_add(self,payload):
         message_id = payload.message_id
-        if message_id == config.ID:
+        if message_id == cursor.execute("SELECT reaction_message_id FROM config WHERE server_id = {}".format(payload.guild_id)).fetchone()[0]:
             guild_id = payload.guild_id
             guild = discord.utils.find(lambda g : g.id == guild_id, self.bot.guilds)
             if payload.emoji.name == 'ratblanket':
@@ -52,7 +50,7 @@ class role_events(commands.Cog):
     @commands.Cog.listener()
     async def on_raw_reaction_remove(self,payload):
         message_id = payload.message_id
-        if message_id == config.ID:
+        if message_id == cursor.execute("SELECT reaction_message_id FROM config WHERE server_id = {}".format(payload.guild_id)).fetchone()[0]:
             guild_id = payload.guild_id
             guild = discord.utils.find(lambda g : g.id == guild_id, self.bot.guilds)
             if payload.emoji.name == 'ratblanket':

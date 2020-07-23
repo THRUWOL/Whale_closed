@@ -4,8 +4,6 @@ import sqlite3
 import random
 import os
 
-import config
-
 from discord.ext import commands
 from discord import Member, Guild
 from Cybernator import Paginator as pag
@@ -79,9 +77,10 @@ class db_events(commands.Cog):
         connection.commit()
 #Создание таблицы config
         cursor.execute("""CREATE TABLE IF NOT EXISTS config (
-            reaction_message_id BIGINT,
-            rpg_ID BIGINT,
-            rps_ID BIGINT
+            reaction_message_id INT,
+            rpg_ID INT,
+            rps_ID INT,
+            server_ID INT
         )""")
         for guild in self.bot.guilds:
             for member in guild.members:
@@ -89,9 +88,12 @@ class db_events(commands.Cog):
                     cursor.execute(f"INSERT INTO rpg_users VALUES('{member}', {member.id}, 0, 5, 100, 0)")
                 else:
                     pass
-
                 if cursor.execute(f"SELECT id FROM users WHERE id = {member.id}").fetchone() is None:
                     cursor.execute(f"INSERT INTO users VALUES ('{member}', {member.id}, 0, 10, 1, 0, 0, 0, 0, {guild.id})")
+                else:
+                    pass
+                if cursor.execute(f"SELECT server_ID FROM config WHERE server_ID = {guild.id}").fetchone() is None:
+                    cursor.execute(f"INSERT INTO config VALUES (0,0,0,{guild.id})")
                 else:
                     pass
         connection.commit()
