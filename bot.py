@@ -13,7 +13,18 @@ from Cybernator import Paginator as pag
 client = commands.Bot(command_prefix = '.')
 client.remove_command('help')
 
-extensions = ['setting.db','events.status','setting.configs','commands.commands','events.roles_reaction','games.rps','games.rpg']
+extensions = [
+    'setting.db',
+    'setting.configs',
+    'events.status',
+    'events.xp',
+    'events.roles_reaction',
+    'commands.admin_commands',
+    'commands.moderator_commands',
+    'commands.user_commands',
+    'games.rps',
+    'games.rpg',
+    'commands.random_smth']
 
 if __name__ == '__main__':
     for ext in extensions:

@@ -16,18 +16,21 @@ class server_config(commands.Cog):
         self.bot = bot
 # Установка ID для реакции
     @commands.command()
+    @commands.has_permissions(administrator = True)
     async def rm_id(self,ctx, id = None):
         cursor.execute(f"UPDATE config SET reaction_message_id = {id} WHERE server_ID = {ctx.author.guild.id}")
         connection.commit()
         await ctx.send(f"ID сообщения под реакции установлено")
 # Установка ID для rpg
     @commands.command()
+    @commands.has_permissions(administrator = True)
     async def rpg_id(self,ctx, id = None):
         cursor.execute(f"UPDATE config SET rpg_id = {id} WHERE server_ID = {ctx.author.guild.id}")
         connection.commit()
         await ctx.send(f"ID канала под rpg установлено")
 # Установка Id для rps
     @commands.command()
+    @commands.has_permissions(administrator = True)
     async def rps_id(self,ctx, id = None):
         cursor.execute(f"UPDATE config SET rps_id = {id} WHERE server_ID = {ctx.author.guild.id}")
         connection.commit()

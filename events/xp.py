@@ -35,8 +35,7 @@ class xp_events(commands.Cog):
                     bal = 1000*lv
                     cursor.execute(f"UPDATE users SET lvl={lv}, cash= cash +{bal} where id = {message.author.id}")
                     print(f"[lvl_up]:[{message.author.name}] получил уровень {lv}")
-            #await self.bot.process_commands(message)
-            connection.commit()
+        connection.commit()
 def setup(bot):
     print("xp.py ✅")
     bot.add_cog(xp_events(bot))
